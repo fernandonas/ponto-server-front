@@ -1,0 +1,68 @@
+<main class="auth-shell">
+  <section class="auth-panel">
+    <div class="brand">
+      <span class="brand-mark">P</span>
+      <div>
+        <strong>Ponto Server</strong>
+        <span>Novo acesso</span>
+      </div>
+    </div>
+
+    <form class="auth-card" (ngSubmit)="submit()">
+      <header>
+        <p>Cadastro</p>
+        <h1>Criar conta</h1>
+      </header>
+
+      <label>
+        Nome
+        <input
+          type="text"
+          name="name"
+          autocomplete="name"
+          required
+          [ngModel]="name()"
+          (ngModelChange)="name.set($event)"
+        />
+      </label>
+
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          autocomplete="email"
+          required
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+        />
+      </label>
+
+      <label>
+        Senha
+        <input
+          type="password"
+          name="password"
+          autocomplete="new-password"
+          required
+          minlength="6"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)"
+        />
+      </label>
+
+      @if (errorMessage()) {
+        <p class="feedback">{{ errorMessage() }}</p>
+      }
+
+      <button type="submit" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'Criando...' : 'Criar conta' }}
+      </button>
+
+      <p class="switch-flow">
+        Ja tem cadastro?
+        <a routerLink="/login">Entrar</a>
+      </p>
+    </form>
+  </section>
+</main>

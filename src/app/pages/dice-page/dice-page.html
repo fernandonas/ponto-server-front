@@ -1,0 +1,36 @@
+<main class="dashboard">
+  <header class="topbar">
+    <div>
+      <span>Ponto Server</span>
+      <h1>Home</h1>
+    </div>
+    <nav class="actions">
+      @if (user()?.role === 'admin') {
+        <a routerLink="/admin/users">Usuarios</a>
+      }
+      <button type="button" class="secondary" (click)="logout()">Sair</button>
+    </nav>
+  </header>
+
+  <section class="content">
+    <div class="dice-card" aria-live="polite">
+      <p class="eyebrow">Dado aleatorio</p>
+      <div class="dice" [attr.aria-label]="diceLabel()">{{ diceValue() || '-' }}</div>
+
+      @if (errorMessage()) {
+        <p class="feedback">{{ errorMessage() }}</p>
+      }
+
+      <button type="button" (click)="roll()" [disabled]="isLoading()">
+        {{ isLoading() ? 'Sorteando...' : 'Sortear novamente' }}
+      </button>
+    </div>
+
+    <aside class="profile">
+      <p>Sessao autenticada</p>
+      <strong>{{ user()?.name || 'Usuario' }}</strong>
+      <span>{{ user()?.email }}</span>
+      <small>{{ user()?.role === 'admin' ? 'Admin' : 'Basic' }}</small>
+    </aside>
+  </section>
+</main>

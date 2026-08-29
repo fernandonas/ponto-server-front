@@ -1,0 +1,42 @@
+<main class="admin-page">
+  <header class="topbar">
+    <div>
+      <span>Ponto Server</span>
+      <h1>Usuarios</h1>
+    </div>
+    <a routerLink="/dice">Voltar</a>
+  </header>
+
+  @if (errorMessage()) {
+    <p class="feedback">{{ errorMessage() }}</p>
+  }
+
+  <section class="table-shell">
+    <div class="table-header">
+      <span>Nome</span>
+      <span>Email</span>
+      <span>Role</span>
+    </div>
+
+    @if (isLoading()) {
+      <p class="empty">Carregando...</p>
+    } @else {
+      @for (user of users(); track user.id) {
+        <article class="user-row">
+          <strong>{{ user.name }}</strong>
+          <span>{{ user.email }}</span>
+          <select
+            name="role-{{ user.id }}"
+            [ngModel]="user.role"
+            (ngModelChange)="updateRole(user, $event)"
+          >
+            <option value="admin">Admin</option>
+            <option value="basic">Basic</option>
+          </select>
+        </article>
+      } @empty {
+        <p class="empty">Nenhum usuario encontrado.</p>
+      }
+    }
+  </section>
+</main>
