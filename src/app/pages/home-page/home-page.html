@@ -14,16 +14,7 @@
 
   <section class="content">
     <div class="dice-card" aria-live="polite">
-      <p class="eyebrow">Dado aleatorio</p>
-      <div class="dice" [attr.aria-label]="diceLabel()">{{ diceValue() || '-' }}</div>
-
-      @if (errorMessage()) {
-        <p class="feedback">{{ errorMessage() }}</p>
-      }
-
-      <button type="button" (click)="roll()" [disabled]="isLoading()">
-        {{ isLoading() ? 'Sorteando...' : 'Sortear novamente' }}
-      </button>
+      Conteúdo
     </div>
 
     <aside class="profile">

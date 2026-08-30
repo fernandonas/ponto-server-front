@@ -27,7 +27,7 @@ export class LoginPage {
       email: this.email().trim(),
       password: this.password(),
     }).subscribe({
-      next: () => this.router.navigateByUrl('/dice'),
+      next: () => this.router.navigateByUrl('/home'),
       error: (error: HttpErrorResponse) => {
         this.errorMessage.set(error.error?.message || 'Nao foi possivel entrar.');
         this.isSubmitting.set(false);

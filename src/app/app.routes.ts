@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { adminGuard } from './auth/admin.guard';
 import { authGuard } from './auth/auth.guard';
 import { AdminUsersPage } from './pages/admin-users-page/admin-users-page';
-import { DicePage } from './pages/dice-page/dice-page';
+import { HomePage } from './pages/home-page/home-page';
 import { LoginPage } from './pages/login-page/login-page';
 import { RegisterPage } from './pages/register-page/register-page';
 
@@ -16,8 +16,8 @@ export const routes: Routes = [
     component: RegisterPage,
   },
   {
-    path: 'dice',
-    component: DicePage,
+    path: 'home',
+    component: HomePage,
     canActivate: [authGuard],
   },
   {
@@ -28,10 +28,10 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'dice',
+    redirectTo: 'home',
   },
   {
     path: '**',
-    redirectTo: 'dice',
+    redirectTo: 'home',
   },
 ];
