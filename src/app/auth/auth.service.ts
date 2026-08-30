@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { AuthResponse, LoginRequest, RegisterRequest, User } from './auth.models';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = environment.apiUrl;
 const TOKEN_KEY = 'ponto_token';
 const USER_KEY = 'ponto_user';
 

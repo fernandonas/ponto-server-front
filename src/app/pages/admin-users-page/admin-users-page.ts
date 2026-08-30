@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment';
 import { User, UserRole } from '../../auth/auth.models';
 
 @Component({
@@ -25,7 +26,7 @@ export class AdminUsersPage {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this.http.get<User[]>('http://localhost:3000/api/users').subscribe({
+    this.http.get<User[]>(`${environment.apiUrl}/users`).subscribe({
       next: (users) => this.users.set(users),
       error: (error: HttpErrorResponse) => {
         this.errorMessage.set(error.error?.message || 'Nao foi possivel carregar usuarios.');
@@ -38,7 +39,7 @@ export class AdminUsersPage {
   updateRole(user: User, role: UserRole): void {
     this.errorMessage.set('');
 
-    this.http.put<User>(`http://localhost:3000/api/users/${user.id}`, { role }).subscribe({
+    this.http.put<User>(`${environment.apiUrl}/users/${user.id}`, { role }).subscribe({
       next: (updatedUser) => {
         this.users.update((users) =>
           users.map((item) => item.id === updatedUser.id ? updatedUser : item),

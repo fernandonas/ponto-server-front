@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../auth/auth.service';
 
 interface DiceResponse {
@@ -31,7 +32,7 @@ export class DicePage {
     this.errorMessage.set('');
     this.isLoading.set(true);
 
-    this.http.get<DiceResponse>('http://localhost:3000/api/dice').subscribe({
+    this.http.get<DiceResponse>(`${environment.apiUrl}/dice`).subscribe({
       next: (response) => this.diceValue.set(response.value),
       error: (error: HttpErrorResponse) => {
         if (error.status === 401) {
