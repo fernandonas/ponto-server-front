@@ -2,20 +2,20 @@
   <header class="topbar">
     <div>
       <span>Ponto Server</span>
-      <h1>Home</h1>
+      <h1>Despesas</h1>
     </div>
     <nav class="actions">
       @if (user()?.role === 'admin') {
         <a routerLink="/admin/users">Usuarios</a>
       }
-      <button type="button" class="secondary" routerLink="/expenses">Despesas</button>
+      <button type="button" class="secondary" routerLink="/home">Home</button>
       <button type="button" class="secondary" (click)="logout()">Sair</button>
     </nav>
   </header>
 
   <section class="content">
     <div class="dice-card" aria-live="polite">
-      Home
+      Despesas
     </div>
 
     <aside class="profile">

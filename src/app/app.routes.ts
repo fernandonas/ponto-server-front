@@ -5,6 +5,7 @@ import { AdminUsersPage } from './pages/admin-users-page/admin-users-page';
 import { HomePage } from './pages/home-page/home-page';
 import { LoginPage } from './pages/login-page/login-page';
 import { RegisterPage } from './pages/register-page/register-page';
+import { ExpensesPage } from './pages/expenses-page/expenses-page';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,11 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomePage,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'expenses',
+    component: ExpensesPage,
     canActivate: [authGuard],
   },
   {
