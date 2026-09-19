@@ -24,6 +24,7 @@ export class Match {
   readonly matches = signal<any[]>([]);
   readonly venues = signal<any[]>([]);
   isEditing = false;
+  isFormOpen = false;
   match = this.emptyMatch();
 
   constructor() {
@@ -54,6 +55,7 @@ export class Match {
 
   editMatch(match: any): void {
     this.isEditing = true;
+    this.isFormOpen = true;
     this.match = {
       ...match,
       matchDate: String(match.matchDate).slice(0, 10),
@@ -80,6 +82,17 @@ export class Match {
   cancel(): void {
     this.match = this.emptyMatch();
     this.isEditing = false;
+    this.isFormOpen = false;
+  }
+
+  toggleForm(): void {
+    if (this.isFormOpen) {
+      this.cancel();
+      return;
+    }
+
+    this.isEditing = false;
+    this.isFormOpen = true;
   }
 
   payload(): any {

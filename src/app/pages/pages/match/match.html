@@ -1,5 +1,10 @@
 <section>
 	@if (user()?.role === 'admin') {
+	<button type="button" class="form-toggle btn-primary" (click)="toggleForm()" [attr.aria-expanded]="isFormOpen">
+		{{ isFormOpen ? 'Fechar formulário' : 'Nova partida' }}
+	</button>
+
+	@if (isFormOpen) {
 	<div class="form-card">
 		<div class="form-header">
 			<h2>{{ isEditing ? 'Editar partida' : 'Nova partida' }}</h2>
@@ -61,41 +66,46 @@
 		</form>
 	</div>
 	}
+	}
 
 	@if (matches().length === 0) {
 	<p class="empty">Nenhuma partida cadastrada.</p>
 	} @else {
-	<div class="table-container">
-		<table>
-			<thead>
-				<tr>
-					<th>Local</th>
-					<th>Data</th>
-					<th>Horário</th>
-					<th>Valor</th>
-					<th>Status</th>
-					@if (user()?.role === 'admin') { <th>Ações</th> }
-				</tr>
-			</thead>
-			<tbody>
-				@for (item of matches(); track item.id) {
-				<tr>
-					<td>{{ item.venueName }}</td>
-					  <td>{{ formatDate(item.matchDate) }}</td>
-					<td>{{ item.startTime | slice:0:5 }} - {{ item.endTime | slice:0:5 }}</td>
-					<td>R$ {{ item.hourlyRate | number:'1.2-2' }}</td>
-					<td>{{ statusLabel(item.status) }}</td>
-					@if (user()?.role === 'admin') {
-					<td class="actions">
-						<a [routerLink]="['/pages/match', item.id, 'players']">Jogadores</a>
-						<button type="button" (click)="editMatch(item)">Editar</button>
-						<button type="button" (click)="deleteMatch(item.id)">Excluir</button>
-					</td>
-					}
-				</tr>
-				}
-			</tbody>
-		</table>
+	<div class="card-grid">
+		@for (item of matches(); track item.id) {
+		<article class="match-card">
+			<div class="card-heading">
+				<div>
+					<span class="card-label">Local</span>
+					<h3>{{ item.venueName }}</h3>
+				</div>
+				<span class="status-badge">{{ statusLabel(item.status) }}</span>
+			</div>
+
+			<div class="match-info">
+				<div>
+					<span class="card-label">Data</span>
+					<strong>{{ formatDate(item.matchDate) }}</strong>
+				</div>
+				<div>
+					<span class="card-label">Horário</span>
+					<strong>{{ item.startTime | slice:0:5 }} - {{ item.endTime | slice:0:5 }}</strong>
+				</div>
+				<div>
+					<span class="card-label">Valor por hora</span>
+					<strong>R$ {{ item.hourlyRate | number:'1.2-2' }}</strong>
+				</div>
+			</div>
+
+			@if (user()?.role === 'admin') {
+			<div class="actions">
+				<a [routerLink]="['/pages/match', item.id, 'players']">Jogadores</a>
+				<button type="button" (click)="editMatch(item)">Editar</button>
+				<button type="button" (click)="deleteMatch(item.id)">Excluir</button>
+			</div>
+			}
+		</article>
+		}
 	</div>
 	}
 </section>

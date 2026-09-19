@@ -1,9 +1,14 @@
   <section>
     @if (user()?.role === 'admin') {
+    <button type="button" class="form-toggle btn-primary" (click)="toggleForm()" [attr.aria-expanded]="isFormOpen">
+      {{ isFormOpen ? 'Fechar formulário' : 'Novo local' }}
+    </button>
+
+    @if (isFormOpen) {
     <div class="form-card">
 
       <div class="form-header">
-        <h2>Novo local</h2>
+        <h2>{{ isEditing ? 'Editar local' : 'Novo local' }}</h2>
         <p>Cadastre um local para disponibilizar para reservas.</p>
       </div>
 
@@ -54,47 +59,41 @@
 
     </div>
     }
+    }
     @if(venues().length === 0) {
     <p class="empty">Nenhum local cadastrado.</p>
     }
     @else {
-    <div class="table-container">
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Local</th>
-              <th>Endereço</th>
-              <th>Valor</th>
-              @if (user()?.role === 'admin') {
-              <th>Ações</th>
-              }
-            </tr>
-          </thead>
+    <div class="card-grid">
+      @for (item of venues(); track item.id) {
+      <article class="venue-card">
+        <div class="card-heading">
+          <div>
+            <span class="card-label">Local</span>
+            <h3>{{ item.name }}</h3>
+          </div>
+          <span class="active-badge">Ativo</span>
+        </div>
 
-          <tbody>
-            @for (item of venues(); track $index) {
-            <tr>
-              <td>{{ item.name }}</td>
-              <td>{{ item.address }}</td>
-              <td>R$ {{ item.hourlyRate | number:'1.2-2' }}</td>
+        <div class="venue-info">
+          <div>
+            <span class="card-label">Endereço</span>
+            <strong>{{ item.address || 'Endereço não informado' }}</strong>
+          </div>
+          <div>
+            <span class="card-label">Valor por hora</span>
+            <strong>R$ {{ item.hourlyRate | number:'1.2-2' }}</strong>
+          </div>
+        </div>
 
-              @if (user()?.role === 'admin') {
-              <td class="actions">
-                <button type="button" (click)="editVenue(item)">
-                  Editar
-                </button>
-
-                <button type="button" (click)="deleteLocal(item.id)">
-                  Excluir
-                </button>
-              </td>
-              }
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
+        @if (user()?.role === 'admin') {
+        <div class="actions">
+          <button type="button" (click)="editVenue(item)">Editar</button>
+          <button type="button" (click)="deleteLocal(item.id)">Excluir</button>
+        </div>
+        }
+      </article>
+      }
     </div>
     }    
   </section>

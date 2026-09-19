@@ -17,6 +17,7 @@ export class VenuesPage {
   private readonly venueService = inject(VenueService);
   readonly user = this.authService.user;
   isEditing: boolean = false;
+  isFormOpen: boolean = false;
   venuesSimple = signal<any[]>([]);
 
   venues = signal<any[]>([]);
@@ -64,6 +65,17 @@ selectedVenueId: any;
       hourlyRate: 0
     }
     this.isEditing = false;
+    this.isFormOpen = false;
+  }
+
+  toggleForm(): void {
+    if (this.isFormOpen) {
+      this.cancel();
+      return;
+    }
+
+    this.isEditing = false;
+    this.isFormOpen = true;
   }
 
 
@@ -77,6 +89,7 @@ selectedVenueId: any;
 
   editVenue(venue: any) {
     this.isEditing = true;
+    this.isFormOpen = true;
     this.venue = { ...venue };
   }
 
