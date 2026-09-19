@@ -58,6 +58,22 @@
   padding: 28px;
 }
 
+@media (max-width: 480px) {
+  .auth-shell {
+    align-items: start;
+    padding: 20px 14px;
+  }
+
+  .auth-panel {
+    gap: 20px;
+  }
+
+  .auth-card {
+    gap: 16px;
+    padding: 20px 16px;
+  }
+}
+
 header p {
   color: #457b9d;
   font-size: 14px;

@@ -66,7 +66,12 @@ button:disabled { cursor: not-allowed; opacity: .5; }
 .empty { margin: 0; padding: 24px; color: #9ca3af; text-align: center; }
 
 @media (max-width: 680px) {
-  section { padding: 14px; }
+  section { padding: 14px 10px; }
   .page-header, .assign-card { display: grid; align-items: stretch; }
   .assign-form { min-width: 0; flex-direction: column; }
+  .page-header a { justify-self: start; }
+  .match-selector, .assign-card { padding: 14px; }
+  .list-header, .player-row { padding-inline: 14px; }
+  .player-row { align-items: start; flex-direction: column; }
+  .btn-remove { width: 100%; }
 }

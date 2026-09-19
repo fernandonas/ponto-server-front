@@ -113,6 +113,27 @@ select {
     grid-template-columns: 1fr;
   }
 
+  h1 {
+    font-size: 26px;
+  }
+
+  a {
+    justify-self: start;
+  }
+
+  .table-shell {
+    overflow: visible;
+  }
+
+  .user-row {
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .user-row select {
+    width: 100%;
+  }
+
   .topbar {
     align-items: start;
     display: grid;

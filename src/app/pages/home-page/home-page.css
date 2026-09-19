@@ -181,7 +181,7 @@ button:disabled {
 
 @media (max-width: 720px) {
   .dashboard {
-    padding: 18px;
+    padding: 18px 14px;
   }
 
   .topbar,
@@ -196,5 +196,26 @@ button:disabled {
 
   .actions {
     flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .actions a,
+  .actions button {
+    flex: 1 1 140px;
+  }
+
+  .content {
+    gap: 14px;
+  }
+
+  .matches-card,
+  .profile {
+    padding: 20px;
+  }
+
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+    margin-bottom: 14px;
   }
 }
