@@ -6,6 +6,7 @@ import { finalize, take } from 'rxjs';
 import { AuthService } from '../../../auth/auth.service';
 import { MatchService } from '../../../services/match.service';
 import { VenueService } from '../../../services/venue.service';
+import { formatLocalizedDate } from '../../../utils/localized-date';
 
 @Component({
   selector: 'app-match',
@@ -99,6 +100,10 @@ export class Match {
       finished: 'Finalizada',
       cancelled: 'Cancelada',
     }[status] || status;
+  }
+
+  formatDate(value: string): string {
+    return formatLocalizedDate(value);
   }
 
   private emptyMatch(): any {

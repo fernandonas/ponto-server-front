@@ -115,10 +115,12 @@ h1 {
   color: #1d3557;
   display: grid;
   justify-items: center;
-  padding: 8px 4px;
+  padding: 8px 6px;
+  text-align: center;
+  white-space: nowrap;
 }
 
-.match-date strong { font-size: 18px; }
+.match-date strong { font-size: 13px; }
 .match-date span, .match-details span { color: #64748b; font-size: 13px; }
 .match-details { display: grid; gap: 5px; }
 .match-status { color: #2a9d8f; font-size: 13px; font-weight: 800; }

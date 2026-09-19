@@ -81,7 +81,7 @@
 				@for (item of matches(); track item.id) {
 				<tr>
 					<td>{{ item.venueName }}</td>
-					<td>{{ item.matchDate | slice:0:10 }}</td>
+					  <td>{{ formatDate(item.matchDate) }}</td>
 					<td>{{ item.startTime | slice:0:5 }} - {{ item.endTime | slice:0:5 }}</td>
 					<td>R$ {{ item.hourlyRate | number:'1.2-2' }}</td>
 					<td>{{ statusLabel(item.status) }}</td>

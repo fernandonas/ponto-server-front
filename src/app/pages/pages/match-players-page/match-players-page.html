@@ -4,7 +4,7 @@
       <span class="eyebrow">Escalação</span>
       <h2>Jogadores da partida</h2>
       @if (selectedMatch(); as match) {
-      <p>{{ match.venueName }} · {{ match.matchDate | slice:0:10 }} · {{ match.startTime | slice:0:5 }} - {{ match.endTime | slice:0:5 }}</p>
+      <p>{{ match.venueName }} · {{ formatDate(match.matchDate) }} · {{ match.startTime | slice:0:5 }} - {{ match.endTime | slice:0:5 }}</p>
       }
     </div>
     <a routerLink="/pages/match">Voltar para partidas</a>
@@ -16,7 +16,7 @@
       <option value="" disabled>Selecione uma partida</option>
       @for (match of matches(); track match.id) {
       <option [value]="match.id">
-        {{ match.venueName }} - {{ match.matchDate | slice:0:10 }} - {{ match.startTime | slice:0:5 }}
+        {{ match.venueName }} - {{ formatDate(match.matchDate) }} - {{ match.startTime | slice:0:5 }}
       </option>
       }
     </select>

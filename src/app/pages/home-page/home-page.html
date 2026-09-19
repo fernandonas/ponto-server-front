@@ -35,8 +35,7 @@
         @for (match of upcomingMatches(); track match.id) {
           <article class="match-row">
             <div class="match-date">
-              <strong>{{ match.matchDate | slice:5:10 }}</strong>
-              <span>{{ match.matchDate | slice:0:4 }}</span>
+              <strong>{{ formatDate(match.matchDate) }}</strong>
             </div>
             <div class="match-details">
               <strong>{{ match.venueName }}</strong>

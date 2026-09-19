@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { MatchPlayerService } from '../../../services/match-player.service';
 import { MatchService } from '../../../services/match.service';
+import { formatLocalizedDate } from '../../../utils/localized-date';
 
 @Component({
   selector: 'app-match-players-page',
@@ -100,5 +101,9 @@ export class MatchPlayersPage {
 
   selectedMatch(): any {
     return this.matches().find(match => match.id === this.selectedMatchId());
+  }
+
+  formatDate(value: string): string {
+    return formatLocalizedDate(value);
   }
 }
