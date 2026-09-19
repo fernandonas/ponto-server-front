@@ -128,8 +128,30 @@ h1 {
 .feedback { color: #b91c1c; font-size: 14px; }
 
 @media (max-width: 520px) {
-  .match-row { grid-template-columns: 56px minmax(0, 1fr); }
-  .match-status { grid-column: 2; }
+  .matches-card {
+    min-height: 0;
+  }
+
+  .match-row {
+    align-items: start;
+    column-gap: 12px;
+    grid-template-columns: 82px minmax(0, 1fr);
+    row-gap: 8px;
+  }
+
+  .match-date {
+    min-height: 34px;
+    padding: 8px 4px;
+    white-space: normal;
+  }
+
+  .match-date strong {
+    font-size: 12px;
+  }
+
+  .match-status {
+    grid-column: 2;
+  }
 }
 
 button {
