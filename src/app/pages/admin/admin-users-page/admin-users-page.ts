@@ -1,13 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { environment } from '../../../environments/environment';
-import { User, UserRole } from '../../auth/auth.models';
+import { environment } from '../../../../environments/environment';
+import { User, UserRole } from '../../../auth/auth.models';
 
 @Component({
   selector: 'app-admin-users-page',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './admin-users-page.html',
   styleUrl: './admin-users-page.css',
 })

@@ -1,0 +1,13 @@
+<main class="admin-page">
+  <header class="topbar">
+    <div>
+      <span>Ponto Server</span>
+      <h1>{{ outlet.activatedRouteData['title'] }}</h1>
+    </div>
+    <a routerLink="/home">Voltar</a>
+  </header>
+
+  <section class="table-shell">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </section>
+</main>

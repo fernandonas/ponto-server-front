@@ -8,14 +8,46 @@
       @if (user()?.role === 'admin') {
         <a routerLink="/admin/users">Usuarios</a>
       }
-      <button type="button" class="secondary" routerLink="/expenses">Despesas</button>
+      <button type="button" class="secondary" routerLink="/pages/venues">Local</button>
+      <button type="button" class="secondary" routerLink="/pages/match">Partidas</button>
+      @if (user()?.role === 'admin') {
+        <button type="button" class="secondary" routerLink="/pages/match-players">Jogadores</button>
+      }
       <button type="button" class="secondary" (click)="logout()">Sair</button>
     </nav>
   </header>
 
   <section class="content">
-    <div class="dice-card" aria-live="polite">
-      Home
+    <div class="matches-card" aria-live="polite">
+      <div class="section-heading">
+        <div>
+          <span>Agenda</span>
+          <h2>Proximas partidas</h2>
+        </div>
+        <a routerLink="/pages/match">Ver partidas</a>
+      </div>
+
+      @if (isLoadingMatches()) {
+        <p class="empty">Carregando partidas...</p>
+      } @else if (matchesError()) {
+        <p class="feedback">{{ matchesError() }}</p>
+      } @else {
+        @for (match of upcomingMatches(); track match.id) {
+          <article class="match-row">
+            <div class="match-date">
+              <strong>{{ match.matchDate | slice:5:10 }}</strong>
+              <span>{{ match.matchDate | slice:0:4 }}</span>
+            </div>
+            <div class="match-details">
+              <strong>{{ match.venueName }}</strong>
+              <span>{{ match.startTime | slice:0:5 }} - {{ match.endTime | slice:0:5 }}</span>
+            </div>
+            <span class="match-status">{{ statusLabel(match.status) }}</span>
+          </article>
+        } @empty {
+          <p class="empty">Voce nao participa de nenhuma proxima partida.</p>
+        }
+      }
     </div>
 
     <aside class="profile">

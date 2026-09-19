@@ -1,0 +1,100 @@
+  <section>
+    @if (user()?.role === 'admin') {
+    <div class="form-card">
+
+      <div class="form-header">
+        <h2>Novo local</h2>
+        <p>Cadastre um local para disponibilizar para reservas.</p>
+      </div>
+
+      <form (ngSubmit)="isEditing ? updateVenue() : createVenue()">
+
+        <div class="form-group">
+          <label for="name">Nome do local</label>
+
+          <input id="name" type="text" [(ngModel)]="venue.name" name="name" placeholder="Ex: Arena Central" required />
+        </div>
+
+        <div class="form-group">
+          <label for="address">Endereço</label>
+
+          <input id="address" type="text" [(ngModel)]="venue.address" name="address"
+            placeholder="Ex: Rua das Flores, 123" />
+
+          <span class="hint">Opcional</span>
+        </div>
+
+        <div class="form-group">
+          <label for="hourlyRate">Valor por hora</label>
+
+          <div class="money-input">
+            <span>R$</span>
+
+            <input id="hourlyRate" type="number" [(ngModel)]="venue.hourlyRate" name="hourlyRate" placeholder="0,00"
+              min="0" step="0.01" required />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" (click)="cancel()">
+            Cancelar
+          </button>
+
+          <button type="submit" class="btn-primary">
+            @if(isEditing) {
+            Atualizar local
+
+            } @else {
+            Criar local
+            }
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+    }
+    @if(venues().length === 0) {
+    <p class="empty">Nenhum local cadastrado.</p>
+    }
+    @else {
+    <div class="table-container">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Local</th>
+              <th>Endereço</th>
+              <th>Valor</th>
+              @if (user()?.role === 'admin') {
+              <th>Ações</th>
+              }
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (item of venues(); track $index) {
+            <tr>
+              <td>{{ item.name }}</td>
+              <td>{{ item.address }}</td>
+              <td>R$ {{ item.hourlyRate | number:'1.2-2' }}</td>
+
+              @if (user()?.role === 'admin') {
+              <td class="actions">
+                <button type="button" (click)="editVenue(item)">
+                  Editar
+                </button>
+
+                <button type="button" (click)="deleteLocal(item.id)">
+                  Excluir
+                </button>
+              </td>
+              }
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    }    
+  </section>

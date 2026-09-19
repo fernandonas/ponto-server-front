@@ -36,7 +36,6 @@
 }
 
 .topbar span,
-.eyebrow,
 .profile p {
   color: #457b9d;
   font-size: 13px;
@@ -59,7 +58,7 @@ h1 {
   max-width: 960px;
 }
 
-.dice-card,
+.matches-card,
 .profile {
   background: #ffffff;
   border: 1px solid #d9e1ec;
@@ -68,27 +67,67 @@ h1 {
   padding: 28px;
 }
 
-.dice-card {
-  align-items: center;
-  display: grid;
-  justify-items: center;
+.matches-card {
   min-height: 420px;
 }
 
-.dice {
-  align-items: center;
-  aspect-ratio: 1;
-  background: #ffffff;
-  border: 6px solid #1d3557;
-  border-radius: 8px;
-  box-shadow: inset 0 -12px 0 rgba(29, 53, 87, 0.08);
-  color: #e63946;
+.section-heading {
+  align-items: start;
   display: flex;
-  font-size: 120px;
-  font-weight: 900;
-  justify-content: center;
-  line-height: 1;
-  width: min(260px, 70vw);
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.section-heading span {
+  color: #457b9d;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.section-heading h2 {
+  margin: 5px 0 0;
+  font-size: 24px;
+}
+
+.section-heading a {
+  color: #1d3557;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.match-row {
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  padding: 16px 0;
+}
+
+.match-date {
+  align-items: center;
+  background: #edf2f7;
+  border-radius: 7px;
+  color: #1d3557;
+  display: grid;
+  justify-items: center;
+  padding: 8px 4px;
+}
+
+.match-date strong { font-size: 18px; }
+.match-date span, .match-details span { color: #64748b; font-size: 13px; }
+.match-details { display: grid; gap: 5px; }
+.match-status { color: #2a9d8f; font-size: 13px; font-weight: 800; }
+.empty { color: #64748b; font-size: 14px; }
+.feedback { color: #b91c1c; font-size: 14px; }
+
+@media (max-width: 520px) {
+  .match-row { grid-template-columns: 56px minmax(0, 1fr); }
+  .match-status { grid-column: 2; }
 }
 
 button {
@@ -110,15 +149,6 @@ button:disabled {
 
 .secondary {
   background: #1d3557;
-}
-
-.feedback {
-  background: #fff1f2;
-  border: 1px solid #fecdd3;
-  border-radius: 8px;
-  color: #be123c;
-  margin: 0;
-  padding: 10px 12px;
 }
 
 .profile {

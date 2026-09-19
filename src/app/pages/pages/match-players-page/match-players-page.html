@@ -1,0 +1,64 @@
+<section>
+  <header class="page-header">
+    <div>
+      <span class="eyebrow">Escalação</span>
+      <h2>Jogadores da partida</h2>
+      @if (selectedMatch(); as match) {
+      <p>{{ match.venueName }} · {{ match.matchDate | slice:0:10 }} · {{ match.startTime | slice:0:5 }} - {{ match.endTime | slice:0:5 }}</p>
+      }
+    </div>
+    <a routerLink="/pages/match">Voltar para partidas</a>
+  </header>
+
+  <div class="match-selector">
+    <label for="match">Partida</label>
+    <select id="match" [ngModel]="selectedMatchId()" (ngModelChange)="selectMatch($event)">
+      <option value="" disabled>Selecione uma partida</option>
+      @for (match of matches(); track match.id) {
+      <option [value]="match.id">
+        {{ match.venueName }} - {{ match.matchDate | slice:0:10 }} - {{ match.startTime | slice:0:5 }}
+      </option>
+      }
+    </select>
+  </div>
+
+  @if (errorMessage) {
+  <p class="feedback">{{ errorMessage }}</p>
+  }
+
+  @if (selectedMatchId()) {
+  <div class="assign-card">
+    <div>
+      <h3>Atribuir jogador</h3>
+      <p>Selecione um usuário para incluir nesta partida.</p>
+    </div>
+    <div class="assign-form">
+      <select [(ngModel)]="selectedUserId" aria-label="Jogador">
+        <option value="">Selecione um jogador</option>
+        @for (user of availableUsers(); track user.id) {
+        <option [value]="user.id">{{ user.name }} · {{ user.email }}</option>
+        }
+      </select>
+      <button type="button" class="btn-primary" (click)="addPlayer()" [disabled]="!selectedUserId">Atribuir</button>
+    </div>
+  </div>
+
+  <div class="players-list">
+    <div class="list-header">
+      <h3>Jogadores atribuídos</h3>
+      <span>{{ players().length }} jogador(es)</span>
+    </div>
+    @for (player of players(); track player.id) {
+    <article class="player-row">
+      <div>
+        <strong>{{ player.name }}</strong>
+        <span>{{ player.email }}</span>
+      </div>
+      <button type="button" class="btn-remove" (click)="removePlayer(player.userId)">Remover</button>
+    </article>
+    } @empty {
+    <p class="empty">Nenhum jogador atribuído a esta partida.</p>
+    }
+  </div>
+  }
+</section>
